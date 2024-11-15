@@ -44,4 +44,27 @@
     <script src="/__/firebase/init.js"></script>
     <script src="app.js"></script>
 </body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDq9BnmumHmg11AIuTSMSoXw024DKpQg9U",
+      authDomain: "cloud-based-to-do-lists.firebaseapp.com",
+      projectId: "cloud-based-to-do-lists",
+      storageBucket: "cloud-based-to-do-lists.firebasestorage.app",
+      messagingSenderId: "1050553276520",
+      appId: "1:1050553276520:web:5a87e9ac149fb558c403dd",
+      measurementId: "G-PMRYC0EG49"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </html>
