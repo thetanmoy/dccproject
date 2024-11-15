@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud To-Do List App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-container" class="card">
+            <h2>Welcome Back</h2>
+            <p>Sign in to manage your to-do list</p>
+            <form id="login-form" class="form">
+                <input type="email" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Password">
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <hr>
+            <p>New here? Sign up below:</p>
+            <form id="signup-form" class="form">
+                <input type="email" id="signup-email" placeholder="Email">
+                <input type="password" id="signup-password" placeholder="Password">
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+
+        <div id="todo-container" class="card" style="display:none;">
+            <h2>Your To-Do List</h2>
+            <form id="todo-form">
+                <input type="text" id="todo-input" placeholder="New Task">
+                <button type="submit" class="btn">Add Task</button>
+            </form>
+            <ul id="todo-list"></ul>
+            <button id="logout-button" class="btn logout-btn">Logout</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK v9 compat for browser environments -->
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-compat.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
