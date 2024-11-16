@@ -63,17 +63,37 @@ document.getElementById('logout-button').addEventListener('click', () => {
         });
 });
 
-// Real-time Firestore sync
+// // Real-time Firestore sync
+// db.collection('todos').onSnapshot((snapshot) => {
+//     const todoList = document.getElementById('todo-list');
+//     todoList.innerHTML = '';  // Clear the list before rendering
+
+//     snapshot.forEach((doc) => {
+//         const todoItem = document.createElement('li');
+//         todoItem.textContent = doc.data().task;
+//         todoList.appendChild(todoItem);
+
+//         // Add delete button to each task
+//         const deleteButton = document.createElement('button');
+//         deleteButton.textContent = "Delete";
+//         deleteButton.addEventListener('click', () => {
+//             db.collection('todos').doc(doc.id).delete()
+//                 .then(() => console.log("Task deleted successfully"))
+//                 .catch((error) => console.error("Error deleting task:", error.message));
+//         });
+//         todoItem.appendChild(deleteButton);
+//     });
+// });
 db.collection('todos').onSnapshot((snapshot) => {
     const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = '';  // Clear the list before rendering
+    todoList.innerHTML = ''; // Clear the list before rendering
 
     snapshot.forEach((doc) => {
         const todoItem = document.createElement('li');
-        todoItem.textContent = doc.data().task;
-        todoList.appendChild(todoItem);
+        const taskData = doc.data();
+        todoItem.textContent = taskData.task;
 
-        // Add delete button to each task
+        // Create Delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = "Delete";
         deleteButton.addEventListener('click', () => {
@@ -82,6 +102,25 @@ db.collection('todos').onSnapshot((snapshot) => {
                 .catch((error) => console.error("Error deleting task:", error.message));
         });
         todoItem.appendChild(deleteButton);
+
+        // Create Modify button
+        const modifyButton = document.createElement('button');
+        modifyButton.textContent = "Modify";
+        modifyButton.addEventListener('click', () => {
+            const newTask = prompt("Enter the updated task:", taskData.task);
+            if (newTask && newTask.trim() !== "") {
+                db.collection('todos').doc(doc.id).update({
+                    task: newTask.trim()
+                })
+                .then(() => console.log("Task updated successfully"))
+                .catch((error) => console.error("Error updating task:", error.message));
+            } else {
+                alert("Task cannot be empty.");
+            }
+        });
+        todoItem.appendChild(modifyButton);
+
+        todoList.appendChild(todoItem);
     });
 });
 
