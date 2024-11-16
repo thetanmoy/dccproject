@@ -8,12 +8,60 @@ auth.onAuthStateChanged((user) => {
         console.log("User is logged in:", user.email);
         document.getElementById('auth-container').style.display = "none";
         document.getElementById('todo-container').style.display = "block";
+
+        // Fetch tasks for the logged-in user
+        fetchTasks();
     } else {
         console.log("No user is logged in");
         document.getElementById('auth-container').style.display = "block";
         document.getElementById('todo-container').style.display = "none";
     }
 });
+
+// Fetch tasks for the logged-in user
+function fetchTasks() {
+    const userId = auth.currentUser.uid; // Get current user's UID
+
+    db.collection('todos')
+        .where("userId", "==", userId) // Filter tasks based on user ID
+        .onSnapshot((snapshot) => {
+            const todoList = document.getElementById('todo-list');
+            todoList.innerHTML = '';  // Clear the list before rendering
+
+            snapshot.forEach((doc) => {
+                const todoItem = document.createElement('li');
+                todoItem.textContent = doc.data().task;
+                todoList.appendChild(todoItem);
+
+                // Add delete button to each task
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener('click', () => {
+                    db.collection('todos').doc(doc.id).delete()
+                        .then(() => console.log("Task deleted successfully"))
+                        .catch((error) => console.error("Error deleting task:", error.message));
+                });
+                todoItem.appendChild(deleteButton);
+
+                // Create Modify button
+                const modifyButton = document.createElement('button');
+                modifyButton.textContent = "Modify";
+                modifyButton.addEventListener('click', () => {
+                    const newTask = prompt("Enter the updated task:", doc.data().task);
+                    if (newTask && newTask.trim() !== "") {
+                        db.collection('todos').doc(doc.id).update({
+                            task: newTask.trim()
+                        })
+                            .then(() => console.log("Task updated successfully"))
+                            .catch((error) => console.error("Error updating task:", error.message));
+                    } else {
+                        alert("Task cannot be empty.");
+                    }
+                });
+                todoItem.appendChild(modifyButton);
+            });
+        });
+}
 
 // Sign-Up Logic with better logging
 const signupForm = document.getElementById('signup-form');
@@ -63,47 +111,6 @@ document.getElementById('logout-button').addEventListener('click', () => {
         });
 });
 
-// Real-time Firestore sync (fetch tasks for the logged-in user)
-db.collection('todos')
-    .where("userId", "==", auth.currentUser ? auth.currentUser.uid : "") // Fetch only tasks for the current user
-    .onSnapshot((snapshot) => {
-        const todoList = document.getElementById('todo-list');
-        todoList.innerHTML = '';  // Clear the list before rendering
-
-        snapshot.forEach((doc) => {
-            const todoItem = document.createElement('li');
-            todoItem.textContent = doc.data().task;
-            todoList.appendChild(todoItem);
-
-            // Add delete button to each task
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = "Delete";
-            deleteButton.addEventListener('click', () => {
-                db.collection('todos').doc(doc.id).delete()
-                    .then(() => console.log("Task deleted successfully"))
-                    .catch((error) => console.error("Error deleting task:", error.message));
-            });
-            todoItem.appendChild(deleteButton);
-
-            // Create Modify button
-            const modifyButton = document.createElement('button');
-            modifyButton.textContent = "Modify";
-            modifyButton.addEventListener('click', () => {
-                const newTask = prompt("Enter the updated task:", doc.data().task);
-                if (newTask && newTask.trim() !== "") {
-                    db.collection('todos').doc(doc.id).update({
-                        task: newTask.trim()
-                    })
-                        .then(() => console.log("Task updated successfully"))
-                        .catch((error) => console.error("Error updating task:", error.message));
-                } else {
-                    alert("Task cannot be empty.");
-                }
-            });
-            todoItem.appendChild(modifyButton);
-        });
-    });
-
 // Adding new tasks to Firestore with error handling
 const todoForm = document.getElementById('todo-form');
 todoForm.addEventListener('submit', (e) => {
@@ -128,6 +135,7 @@ todoForm.addEventListener('submit', (e) => {
         .then(() => {
             console.log("Task added successfully");
             todoForm.reset();
+            fetchTasks();  // Fetch updated tasks after adding a new one
         })
         .catch((error) => {
             console.error("Error adding task:", error.message);
