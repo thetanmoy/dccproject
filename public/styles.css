@@ -129,7 +129,7 @@ p {
     flex-direction: column;
 }
 #todo-form input{
-    display: flex;
-    flex-direction: column;
+    height: 18px;
+    padding: 18px 12px;
 }
 
