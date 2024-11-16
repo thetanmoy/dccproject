@@ -82,22 +82,22 @@ db.collection('todos').onSnapshot((snapshot) => {
                 .catch((error) => console.error("Error deleting task:", error.message));
         });
         todoItem.appendChild(deleteButton);
-        // Create Modify button
-        const modifyButton = document.createElement('button');
-        modifyButton.textContent = "Modify";
-        modifyButton.addEventListener('click', () => {
-            const newTask = prompt("Enter the updated task:", doc.data().task);
-            if (newTask && newTask.trim() !== "") {
-                db.collection('todos').doc(doc.id).update({
-                    task: newTask.trim()
-                })
-                    .then(() => console.log("Task updated successfully"))
-                    .catch((error) => console.error("Error updating task:", error.message));
-            } else {
-                alert("Task cannot be empty.");
-            }
-        });
-        todoItem.appendChild(modifyButton);
+        // // Create Modify button
+        // const modifyButton = document.createElement('button');
+        // modifyButton.textContent = "Modify";
+        // modifyButton.addEventListener('click', () => {
+        //     const newTask = prompt("Enter the updated task:", doc.data().task);
+        //     if (newTask && newTask.trim() !== "") {
+        //         db.collection('todos').doc(doc.id).update({
+        //             task: newTask.trim()
+        //         })
+        //             .then(() => console.log("Task updated successfully"))
+        //             .catch((error) => console.error("Error updating task:", error.message));
+        //     } else {
+        //         alert("Task cannot be empty.");
+        //     }
+        // });
+        // todoItem.appendChild(modifyButton);
     });
 });
 
