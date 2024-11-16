@@ -114,8 +114,22 @@ p {
     border-radius: 4px;
     cursor: pointer;
 }
+#todo-list li button:last-child{
+    background-color: green;
+}
 
 #todo-list li button:hover {
     background-color: #c82333;
+}
+#todo-list li button:last-child:hover {
+    background-color: darkgreen;
+}
+#todo-form{
+    display: flex;
+    flex-direction: column;
+}
+#todo-form input{
+    display: flex;
+    flex-direction: column;
 }
 
