@@ -97,15 +97,26 @@ p {
 }
 
 #todo-list li {
-    background: #f1f3f5;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch; 
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
+#todo-list li > button {
+    flex: 1;
+    margin: 5px 2px;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 #todo-list li button {
     background-color: #dc3545;
     border: none;
