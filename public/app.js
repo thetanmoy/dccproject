@@ -36,6 +36,7 @@ function fetchTasks() {
                 // Add delete button to each task
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = "Delete";
+                modifyButton.classList.add('delete-btn');
                 deleteButton.addEventListener('click', () => {
                     db.collection('todos').doc(doc.id).delete()
                         .then(() => console.log("Task deleted successfully"))
@@ -46,6 +47,7 @@ function fetchTasks() {
                 // Create Modify button
                 const modifyButton = document.createElement('button');
                 modifyButton.textContent = "Modify";
+                modifyButton.classList.add('modify-btn');
                 modifyButton.addEventListener('click', () => {
                     const newTask = prompt("Enter the updated task:", doc.data().task);
                     if (newTask && newTask.trim() !== "") {

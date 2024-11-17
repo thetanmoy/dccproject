@@ -132,4 +132,7 @@ p {
     height: 18px;
     padding: 18px 12px;
 }
+#todo-list li:nth-child(even){
+    background: grey;
+}
 
