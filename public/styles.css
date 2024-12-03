@@ -1,7 +1,10 @@
 /* General Styles */
 body {
     font-family: 'Poppins', sans-serif; /* More modern font */
-    background-color: #f7f9fc; /* Slightly lighter background */
+    background-image: url('background-image-url.jpg'); /* Add a background image URL here */
+    background-size: cover; /* Ensure the background covers the entire body */
+    background-position: center; /* Center the background image */
+    color: #f7f7f7; /* Light text color for better readability */
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,135 +14,91 @@ body {
 }
 
 .container {
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    max-width: 500px; /* Slightly wider max-width */
+    padding: 40px; /* More padding for better spacing */
+    margin: 20px; /* Add margin to separate from edges */
 }
 
 /* Card Styles for Auth and Todo sections */
 .card {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 12px; /* Increased border radius */
+    padding: 40px; /* Increased padding */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+    margin-bottom: 30px; /* Increase bottom margin */
 }
 
 /* Typography */
 h2 {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #333;
+    color: #ffe259; /* Bright yellow for headers */
+    text-shadow: 1px 1px 2px black; /* Text shadow for better legibility */
 }
 
 p {
-    text-align: center;
-    font-size: 1rem;
-    color: #555;
+    color: #ade8f4; /* Soft blue for paragraph text */
 }
 
 /* Form and Input Styles */
 .form input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: #f8f8f8;
-    transition: border 0.2s ease-in-out;
+    background-color: #e9ecef; /* Neutral background for inputs */
+    border: 2px solid #007bff; /* Blue border */
+    color: #495057; /* Darker text color for contrast */
 }
 
 .form input:focus {
-    border-color: #28a745;
-    outline: none;
+    border-color: #0056b3; /* Darker blue on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Glowing effect */
 }
 
 /* Button Styles */
 .btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.2s ease-in-out;
+    background-color: #007bff; /* Standard blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 .btn:hover {
-    background-color: #218838;
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .logout-btn {
-    background-color: #dc3545;
+    background-color: #ff073a; /* Bright red for contrast */
 }
 
 .logout-btn:hover {
-    background-color: #c82333;
+    background-color: #dc3545; /* Dark red on hover */
 }
 
 /* Todo List Styles */
-#todo-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
 #todo-list li {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch; 
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #ffffff; /* Bright background for each item */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 #todo-list li > button {
-    flex: 1;
-    margin: 5px 2px;
-    padding: 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-#todo-list li button {
-    background-color: #dc3545;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#todo-list li button:last-child{
-    background-color: green;
+    background-color: #28a745; /* Consistent green for all buttons */
 }
 
-#todo-list li button:hover {
-    background-color: #c82333;
+#todo-list li button:last-child {
+    background-color: #ffc107; /* Yellow for modify buttons */
 }
-#todo-list li button:last-child:hover {
-    background-color: darkgreen;
+
+#todo-list li button:hover, #todo-list li button:last-child:hover {
+    opacity: 0.8; /* Slight transparency on hover for a nice effect */
 }
-#todo-form{
-    display: flex;
-    flex-direction: column;
+
+/* Additional Aesthetics */
+/* Add some floating animations or transitions to buttons for interactivity */
+.btn, .logout-btn, #todo-list li > button {
+    transition: background-color 0.3s, opacity 0.3s;
 }
-#todo-form input{
-    height: 18px;
-    padding: 18px 12px;
-}
+
+/* If you're using a background image, make sure it's a high-quality, relevant image to your app's theme */
